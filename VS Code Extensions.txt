@@ -1,0 +1,12 @@
+- Better comments
+- CSS Peek
+- Debugger for Chrome
+- ESLint
+- GitLens
+- JavaScript
+- Live Server
+- Path Intellisense
+- Prettier - Code formatter
+- Project Manager
+- Python
+- REST Client

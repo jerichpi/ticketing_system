@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>HPI | Ticketing System</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free/css/all.min.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/adminlte.min.css') }}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <style>
+    *:focus {
+      outline: 0;
+    }
+    select{
+      border: 0;
+    }
+    button:focus{
+      outline: 0;
+    }
+    .table td, .table th{
+      padding: 5px;
+    }
+    .timeline::before{
+      top: 30px !important;
+    }
+  </style>
+</head>
+<body class="hold-transition layout-top-nav text-sm">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+    <div class="container">
+      <a href="/user/home" class="navbar-brand">
+        <span class="brand-text font-weight-light"><strong>HPI Ticketing</strong></span>
+      </a>
+      
+      <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Right navbar links -->
+      <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="fas fa-cogs"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
+            <a href="" id="profileModal" class="dropdown-item" data-toggle="modal" data-target="#MyProfileModal">
+              <i class="fas fa-id-card mr-2"></i>My Profile
+            </a>
+            <a href="" id="passwordModal" class="dropdown-item" data-toggle="modal" data-target="#ChangePassModal">
+              <i class="fas fa-key mr-2"></i>Change Password
+            </a>
+          </div>
+        </li>
+        <li>
+          <a class="nav-link" href="/user/login">
+            <i class="fas fa-sign-out-alt mr-2"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- /.navbar -->
+
+  {% block content %}
+  {% endblock %}
+
+  <!-- change password modal -->
+  <div class="modal fade" id="ChangePassModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="card-body login-card-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <p class="login-box-msg">You are only one step a way from your new password, change your password now.</p>
+            
+            <form action="login.html" method="post">
+              <div class="input-group mb-3">
+                <input type="password" class="form-control form-control-sm" placeholder="Password">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="password" class="form-control form-control-sm" placeholder="Confirm Password">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary btn-block">Change password</button>
+                </div>
+                <!-- /.col -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <!-- User Profile Modal -->
+  <div class="modal fade" id="MyProfileModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">User Profile</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="LastName">Last Name</label>
+            <input id="LastName" type="text" class="form-control form-control-sm">
+          </div>
+          <div class="form-group">
+            <label for="FirstName">First Name</label>
+            <input id="FirstName" type="text" class="form-control form-control-sm">
+          </div>
+          <div class="form-group">
+            <label for="MiddleInitial">Middle Initial</label>
+            <input id="MiddleInitial" type="text" class="form-control form-control-sm">
+          </div>
+          <div class="form-group">
+            <label for="Department">Department</label>
+            <select name="department" id="Department" class="form-control form-control-sm">
+              <option value="" selected disabled>Select a department</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="Position">Position</label>
+            <select name="position" id="Position" class="form-control form-control-sm">
+              <option value="" selected disabled>Select a position</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="float-right d-none d-sm-inline">
+      Version 1.0
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2020 <a href="http://himlayangpilipino.com.ph/">Himlayang Pilipino, Inc.</a></strong> All rights reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="{{ url_for('static', filename='jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
+<script>
+  $(document).ready(function(){
+	  $('#passwordModal').click(function(){
+      $('#ChangePassModal').modal({
+			  backdrop: 'static'
+		  });
+	  });
+    $('#profileModal').click(function(){
+		  $('#MyProfileModal').modal({
+			  backdrop: 'static'
+		  });
+	  });
+  });
+</script>
+</body>
+</html>
