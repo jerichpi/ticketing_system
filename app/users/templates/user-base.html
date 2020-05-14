@@ -89,9 +89,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </button>
             <p class="login-box-msg">You are only one step a way from your new password, change your password now.</p>
             
-            <form action="login.html" method="post">
+            <form action="" method="POST">
               <div class="input-group mb-3">
-                <input type="password" class="form-control form-control-sm" placeholder="Password">
+                {{ passform.password(class="form-control form-control-sm", placeholder="Password") }}
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-lock"></span>
@@ -99,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
               </div>
               <div class="input-group mb-3">
-                <input type="password" class="form-control form-control-sm" placeholder="Confirm Password">
+                {{ passform.confirm_password(class="form-control form-control-sm", placeholder="Confirm Password") }}
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-lock"></span>
@@ -108,7 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
               <div class="row">
                 <div class="col-12">
-                  <button type="submit" class="btn btn-primary btn-block">Change password</button>
+                  {{ passform.submit(class="btn btn-primary btn-block") }}
                 </div>
                 <!-- /.col -->
               </div>
@@ -131,36 +131,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="LastName">Last Name</label>
-            <input id="LastName" type="text" class="form-control form-control-sm">
+        <form action="" method="POST">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>{{ proform.firstname.label() }}</label>
+              {{ proform.firstname(class="form-control form-control-sm") }}
+            </div>
+            <div class="form-group">
+              <label>{{ proform.lastname.label() }}</label>
+              {{ proform.lastname(class="form-control form-control-sm") }}
+            </div>
+            <div class="form-group">
+              <label>{{ proform.middle_initial.label() }}</label>
+              {{ proform.middle_initial(class="form-control form-control-sm") }}
+            </div>
+            <div class="form-group">
+              <label for="Department">Department</label>
+              <select name="department" id="Department" class="form-control form-control-sm">
+                <option value="" selected disabled>Select a department</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="Position">Position</label>
+              <select name="position" id="Position" class="form-control form-control-sm">
+                <option value="" selected disabled>Select a position</option>
+              </select>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="FirstName">First Name</label>
-            <input id="FirstName" type="text" class="form-control form-control-sm">
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            {{ proform.submit(class="btn btn-primary") }}
           </div>
-          <div class="form-group">
-            <label for="MiddleInitial">Middle Initial</label>
-            <input id="MiddleInitial" type="text" class="form-control form-control-sm">
-          </div>
-          <div class="form-group">
-            <label for="Department">Department</label>
-            <select name="department" id="Department" class="form-control form-control-sm">
-              <option value="" selected disabled>Select a department</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="Position">Position</label>
-            <select name="position" id="Position" class="form-control form-control-sm">
-              <option value="" selected disabled>Select a position</option>
-            </select>
-          </div>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+        </form>
       </div>
       <!-- /.modal-content -->
     </div>

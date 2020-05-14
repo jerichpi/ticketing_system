@@ -1,10 +1,12 @@
 from flask import render_template, Blueprint
+from forms import LoginForm
 
 bp = Blueprint('admin', __name__, template_folder='templates')
 
 @bp.route('/login')
 def login():
-    return render_template("login.html")
+    form = LoginForm()
+    return render_template("login.html", form=form)
 
 @bp.route('/dashboard')
 def dashboard():
