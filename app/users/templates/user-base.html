@@ -17,6 +17,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ url_for('static', filename='css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='toastr/toastr.min.css') }}">
   <style>
     *:focus {
       outline: 0;
@@ -74,10 +76,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
   </nav>
   <!-- /.navbar -->
-
   {% block content %}
   {% endblock %}
-
+  
   <!-- change password modal -->
   <div class="modal fade" id="ChangePassModal">
     <div class="modal-dialog">
@@ -108,7 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
               <div class="row">
                 <div class="col-12">
-                  {{ passform.submit(class="btn btn-primary btn-block") }}
+                  {{ passform.change(class="btn btn-primary btn-block") }}
                 </div>
                 <!-- /.col -->
               </div>
@@ -132,6 +133,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </button>
         </div>
         <form action="" method="POST">
+          {{ proform.hidden_tag() }}
           <div class="modal-body">
             <div class="form-group">
               <label>{{ proform.firstname.label() }}</label>
@@ -160,7 +162,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            {{ proform.submit(class="btn btn-primary") }}
+            {{ proform.save(class="btn btn-primary") }}
           </div>
         </form>
       </div>
@@ -189,6 +191,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
+<!-- Toastr -->
+<script src="{{ url_for('static', filename='toastr/toastr.min.js') }}"></script>
 <script>
   $(document).ready(function(){
 	  $('#passwordModal').click(function(){
@@ -200,8 +204,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		  $('#MyProfileModal').modal({
 			  backdrop: 'static'
 		  });
-	  });
+    });
   });
 </script>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <script>
+        $('.toastrModal').click(function(){
+          toastr.success('{{ message }}');
+        })
+        $('.toastrModal').click();
+      </script>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 </body>
 </html>
