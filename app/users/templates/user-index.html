@@ -22,6 +22,15 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
+  {% with err_messages = get_flashed_messages(with_categories=true) %}
+  {% if err_messages %}
+    {% for category, message in err_messages %}
+      <div class="alert alert-{{ category }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
   <div class="login-logo">
     <a href="/login"><b>HPI</b> Ticketing System</a>
   </div>
@@ -38,17 +47,5 @@
 <script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
 <!-- Toastr -->
 <script src="{{ url_for('static', filename='toastr/toastr.min.js') }}"></script>
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      {% for category, message in messages %}
-      <script>
-        $('.toastrModal').click(function(){
-          toastr.error('{{ message }}')
-        });
-        $('.toastrModal').click();
-      </script>
-      {% endfor %}
-    {% endif %}
-  {% endwith %}
 </body>
 </html>

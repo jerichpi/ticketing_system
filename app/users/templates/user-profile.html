@@ -1,0 +1,88 @@
+{% extends 'user-base.html' %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container">
+      <div class="row mb-2">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <h1 class="m-0 text-dark">My<small> Profile</small></h1>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content-header -->
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-3 col-lg-3"></div>
+        <div class="col-md-6 col-sm-6 col-lg-6">
+          <div class="card card-primary card-outline">
+            <div class="card-body register-card-body">
+              <form action="" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label>{{ form.firstname.label() }}</label>
+                    {% if form.firstname.errors %}
+                      {{ form.firstname(class="form-control form-control-sm is-invalid") }}
+                      <div class="invalid-feedback">
+                        {% for error in form.firstname.errors %}
+                          <span>{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                    {% else %}
+                      {{ form.firstname(class="form-control form-control-sm") }}
+                    {% endif %}
+                  </div>
+                  <div class="form-group">
+                    <label>{{ form.lastname.label() }}</label>
+                    {% if form.lastname.errors %}
+                      {{ form.lastname(class="form-control form-control-sm is-invalid") }}
+                      <div class="invalid-feedback">
+                        {% for error in form.lastname.errors %}
+                          <span>{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                    {% else %}
+                      {{ form.lastname(class="form-control form-control-sm") }}
+                    {% endif %}
+                  </div>
+                  <div class="form-group">
+                    <label>{{ form.middle_initial.label() }}</label>
+                    {% if form.middle_initial.errors %}
+                      {{ form.middle_initial(class="form-control form-control-sm is-invalid") }}
+                      <div class="invalid-feedback">
+                        {% for error in form.middle_initial.errors %}
+                          <span>{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                    {% else %}
+                      {{ form.middle_initial(class="form-control form-control-sm") }}
+                    {% endif %}
+                  </div>
+                  <div class="form-group">
+                    <label for="Department">Department</label>
+                    <select name="department" id="Department" class="form-control form-control-sm">
+                      <option value="" selected disabled>Select a department</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="Position">Position</label>
+                    <select name="position" id="Position" class="form-control form-control-sm">
+                      <option value="" selected disabled>Select a position</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  {{ form.save(class="btn btn-primary") }}
+                </div>
+              </form>
+            </div><!-- /.form-box -->
+          </div> <!-- card -->
+        </div> <!-- col-md-6 -->
+      </div> <!-- row -->
+    </div> <!-- container -->
+  </div> <!-- content -->
+</div>
+<!-- content-wrapper -->
+<!-- /.register-box -->
+{% endblock %}

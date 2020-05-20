@@ -1,13 +1,14 @@
-{% extends "index.html" %}
+{% extends "user-index.html" %}
 {% block content %}
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="/user/home" method="POST">
+      <form action="" method="POST">
+        {{ form.hidden_tag() }}
         <div class="input-group mb-3">
-          {{ form.email(class="form-control", placeholder="Email", type="Email") }}
+          {{ form.email(class="form-control", placeholder="Email") }}
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -40,7 +41,7 @@
       </form>
 
       <p class="mb-1">
-        <a href="/user/forgot-password">I forgot my password</a>
+        <a href="{{ url_for('user.forgot_pass') }}">I forgot my password</a>
       </p>
       <!-- <p class="mb-0">
         <a href="register.html" class="text-center">Register a new membership</a>

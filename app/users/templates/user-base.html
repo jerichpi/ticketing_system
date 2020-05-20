@@ -43,7 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-      <a href="/user/home" class="navbar-brand">
+      <a href="{{ url_for('user.home') }}" class="navbar-brand">
         <span class="brand-text font-weight-light"><strong>HPI Ticketing</strong></span>
       </a>
       
@@ -59,16 +59,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <i class="fas fa-cogs"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-            <a href="" id="profileModal" class="dropdown-item" data-toggle="modal" data-target="#MyProfileModal">
+            <a href="{{ url_for('user.profile') }}" class="dropdown-item">
               <i class="fas fa-id-card mr-2"></i>My Profile
             </a>
-            <a href="" id="passwordModal" class="dropdown-item" data-toggle="modal" data-target="#ChangePassModal">
+            <a href="{{ url_for('user.change_pass') }}" class="dropdown-item">
               <i class="fas fa-key mr-2"></i>Change Password
             </a>
           </div>
         </li>
         <li>
-          <a class="nav-link" href="/user/login">
+          <a class="nav-link" href="{{ url_for('user.login') }}">
             <i class="fas fa-sign-out-alt mr-2"></i>
           </a>
         </li>
@@ -78,98 +78,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.navbar -->
   {% block content %}
   {% endblock %}
-  
-  <!-- change password modal -->
-  <div class="modal fade" id="ChangePassModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="card-body login-card-body">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <p class="login-box-msg">You are only one step a way from your new password, change your password now.</p>
-            
-            <form action="" method="POST">
-              <div class="input-group mb-3">
-                {{ passform.password(class="form-control form-control-sm", placeholder="Password") }}
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="input-group mb-3">
-                {{ passform.confirm_password(class="form-control form-control-sm", placeholder="Confirm Password") }}
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  {{ passform.change(class="btn btn-primary btn-block") }}
-                </div>
-                <!-- /.col -->
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-
-  <!-- User Profile Modal -->
-  <div class="modal fade" id="MyProfileModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">User Profile</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form action="" method="POST">
-          {{ proform.hidden_tag() }}
-          <div class="modal-body">
-            <div class="form-group">
-              <label>{{ proform.firstname.label() }}</label>
-              {{ proform.firstname(class="form-control form-control-sm") }}
-            </div>
-            <div class="form-group">
-              <label>{{ proform.lastname.label() }}</label>
-              {{ proform.lastname(class="form-control form-control-sm") }}
-            </div>
-            <div class="form-group">
-              <label>{{ proform.middle_initial.label() }}</label>
-              {{ proform.middle_initial(class="form-control form-control-sm") }}
-            </div>
-            <div class="form-group">
-              <label for="Department">Department</label>
-              <select name="department" id="Department" class="form-control form-control-sm">
-                <option value="" selected disabled>Select a department</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="Position">Position</label>
-              <select name="position" id="Position" class="form-control form-control-sm">
-                <option value="" selected disabled>Select a position</option>
-              </select>
-            </div>
-          </div>
-          <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            {{ proform.save(class="btn btn-primary") }}
-          </div>
-        </form>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
 
   <!-- Main Footer -->
   <footer class="main-footer">
@@ -193,20 +101,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
 <!-- Toastr -->
 <script src="{{ url_for('static', filename='toastr/toastr.min.js') }}"></script>
-<script>
-  $(document).ready(function(){
-	  $('#passwordModal').click(function(){
-      $('#ChangePassModal').modal({
-			  backdrop: 'static'
-		  });
-	  });
-    $('#profileModal').click(function(){
-		  $('#MyProfileModal').modal({
-			  backdrop: 'static'
-		  });
-    });
-  });
-</script>
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
